@@ -1,18 +1,5 @@
 # Weather Application
 
-*Company*: CodTech IT Solutions
-
-*Name*: Tilak Jain
-
-*Intern ID*: CT08OKR
-
-*Domain*: MERN Stack Development
-
-*Duration*: 4 Weeks
-
-*Mentor*: Neela Santosh
-
-
 ## Quick Introduction
 
 A Weather Application that fetches and displays weather data using a public API. The web app is responsive and integrated with the OpenWeatherMap API, providing users with real-time weather updates and forecasts for various locations. This project demonstrates effective API integration and the development of a user-friendly interface.
