@@ -26,7 +26,7 @@
 .extras{
     display: flex;
     align-items: center;
-    margin: 2px 0;
+    margin: 3px 0;
 }
 .desc{
     text-transform: capitalize;
@@ -41,7 +41,7 @@
 }
 .search{
     width: min(270px, 90%);
-    margin: 15px auto;
+    margin: 16px auto;
     border: 1px solid rgba(187, 187, 187, 0.758);
     border-radius: 50px;
     display: flex;
@@ -52,7 +52,7 @@
     background-color: #483c926a;
     padding: 12px 12px;
     color: white;
-    font-size: 15px;
+    font-size: 17px;
     border: none;
     width: 80%;
 }
@@ -60,7 +60,7 @@
     color: rgba(240, 255, 255, 0.686);
 }
 .search-btn{
-    padding: 10px 12px;
+    padding: 11px 13px;
     background: #483c92;
     border: none;
     color: white;
