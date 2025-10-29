@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App | Hacktoberfest 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .weather-container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 25px;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(6px);
+    }
+
+    input {
+      width: 80%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      outline: none;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #4b6cb7;
+      color: #fff;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background-color: #182848;
+    }
+
+    .weather-display {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .weather-display img {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+
+    .temp {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .desc {
+      font-size: 1.1rem;
+      text-transform: capitalize;
+      opacity: 0.9;
+    }
+
+    .details {
+      margin-top: 15px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    .details div {
+      flex: 1;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 0.85rem;
+      opacity: 0.8;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .weather-container {
+        padding: 20px;
+      }
+
+      .temp {
+        font-size: 1.7rem;
+      }
+
+      button {
+        padding: 8px 18px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🌤️ Weather Application</h1>
+
+  <div class="weather-container">
+    <input type="text" placeholder="Enter city name" />
+    <button>Show Weather</button>
+
+    <div class="weather-display">
+      <img src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png" alt="Weather Icon" />
+      <div class="temp">25°C</div>
+      <div class="desc">Sunny</div>
+
+      <div class="details">
+        <div>💧 Humidity: 60%</div>
+        <div>💨 Wind: 10 km/h</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>Built for Hacktoberfest 2025 | Weather App UI</footer>
+</body>
+</html>
