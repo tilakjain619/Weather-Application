@@ -7,20 +7,26 @@ const Weather = () => {
 
   const searchWeather = async () => {
     if (search === "") {
-      alert("Enter a valid  city name");
+      alert("Enter a valid city name");
     } else {
       try {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${import.meta.env.VITE_OPENWEATHERMAP_API}`
-        );
-        if (!response.ok) {
-          throw new Error("City is not found");
-        }
+        console.log("API Key:", import.meta.env.VITE_OPENWEATHERMAP_API); // Debug log
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${import.meta.env.VITE_OPENWEATHERMAP_API}`;
+        console.log("Request URL:", url); // Debug log
+        
+        const response = await fetch(url);
         const data = await response.json();
-        setWeather(data);
-        console.log(data);
+        
+        if (response.ok) {
+          setWeather(data);
+          console.log("Weather data:", data);
+        } else {
+          throw new Error(data.message || "City not found");
+        }
       } catch (error) {
+        console.error("Error:", error);
         alert(error.message);
+        setWeather(null);
       }
     }
   };
