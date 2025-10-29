@@ -2,7 +2,9 @@
 
 ## Quick Introduction
 
-A Weather Application that fetches and displays weather data using a public API. The web app is responsive and integrated with the OpenWeatherMap API, providing users with real-time weather updates and forecasts for various locations. This project demonstrates effective API integration and the development of a user-friendly interface and good ui also.
+This open-source Weather Application is built for Hacktoberfest 2025! It fetches and displays real-time weather data using the OpenWeatherMap API, offering users live updates and forecasts for cities around the world. The web app features a responsive, user-friendly interface and demonstrates effective API integration, modern frontend design, and community-driven collaboration.
+
+Whether you're a beginner or a seasoned contributor, this project welcomes pull requests for UI improvements, API enhancements, and additional weather features. 🌍💻
 
 
 ## Output
