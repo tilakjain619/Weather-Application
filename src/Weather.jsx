@@ -7,14 +7,14 @@ const Weather = () => {
 
   const searchWeather = async () => {
     if (search === "") {
-      alert("Enter a city name");
+      alert("Enter a valid  city name");
     } else {
       try {
         const response = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${import.meta.env.VITE_OPENWEATHERMAP_API}`
         );
         if (!response.ok) {
-          throw new Error("City not found");
+          throw new Error("City is not found");
         }
         const data = await response.json();
         setWeather(data);
