@@ -3,39 +3,61 @@ import './style.css'
 
 const Weather = () => {
   const [search, setSearch] = useState("");
-  const [weather, setWeather] = useState(null); // Initialize as null
+  const [weather, setWeather] = useState(null);
+  const [forecast, setForecast] = useState(null); // Add state for forecast data
 
   const searchWeather = async () => {
     if (search === "") {
       alert("Enter a valid city name");
     } else {
       try {
-        console.log("API Key:", import.meta.env.VITE_OPENWEATHERMAP_API); // Debug log
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${import.meta.env.VITE_OPENWEATHERMAP_API}`;
-        console.log("Request URL:", url); // Debug log
-        
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        if (response.ok) {
-          setWeather(data);
-          console.log("Weather data:", data);
+        // Current weather API call
+        const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${import.meta.env.VITE_OPENWEATHERMAP_API}`;
+        const weatherResponse = await fetch(weatherUrl);
+        const weatherData = await weatherResponse.json();
+
+        if (weatherResponse.ok) {
+          setWeather(weatherData);
+          
+          // Fetch 7-day forecast using coordinates from weather data
+          const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&appid=${import.meta.env.VITE_OPENWEATHERMAP_API}`;
+          const forecastResponse = await fetch(forecastUrl);
+          const forecastData = await forecastResponse.json();
+          
+          if (forecastResponse.ok) {
+            // Group forecast data by day
+            const dailyForecast = groupForecastByDay(forecastData.list);
+            setForecast(dailyForecast);
+          }
         } else {
-          throw new Error(data.message || "City not found");
+          throw new Error(weatherData.message || "City not found");
         }
       } catch (error) {
         console.error("Error:", error);
         alert(error.message);
         setWeather(null);
+        setForecast(null);
       }
     }
+  };
+
+  // Helper function to group forecast data by day
+  const groupForecastByDay = (forecastList) => {
+    const grouped = {};
+    forecastList.forEach(item => {
+      const date = new Date(item.dt * 1000).toLocaleDateString();
+      if (!grouped[date]) {
+        grouped[date] = item;
+      }
+    });
+    return Object.values(grouped).slice(1, 8); // Get next 7 days
   };
 
   return (
     <div className="container">
       <div className="container-upper">
         <div className="search">
-          <input
+        <input
             onChange={(e) => setSearch(e.target.value)}
             type="text"
             className="search-input"
@@ -49,8 +71,9 @@ const Weather = () => {
       </div>
       <div className="container-lower">
         {weather ? (
-          <div className="card">
-            <img
+          <>
+            <div className="card">
+                 <img
               src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
               alt={weather.weather[0].description}
             />
@@ -66,7 +89,29 @@ const Weather = () => {
             <div className="city-name">
                 {weather.name}, {weather.sys.country}
             </div>
-          </div>
+            </div>
+            
+            {forecast && (
+              <div className="forecast-container">
+                <h3>7-Day Forecast</h3>
+                <div className="forecast-cards">
+                  {forecast.map((day, index) => (
+                    <div key={index} className="forecast-card">
+                      <p>{new Date(day.dt * 1000).toLocaleDateString('en-US', { weekday: 'short' })}</p>
+                      <img
+                        src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
+                        alt={day.weather[0].description}
+                      />
+                      <p className="forecast-temp">
+                        {Math.round(day.main.temp - 273.15)}°C
+                      </p>
+                      <p className="forecast-desc">{day.weather[0].description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
         ) : (
           <p className="search-info">Search for a city to get the weather information.</p>
         )}
